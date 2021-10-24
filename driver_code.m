@@ -14,9 +14,10 @@ for i = 1 : 3
     % Specified values
     [K, c, sigx, r] = deal(100, 100, 0.3, 0.03);
     [T, dt] = deal(1, 0.5/365);
+    L = 300;
 
     if dimension == 1
-        u_computed = cash_or_nothing_dimension1(x, hx, K, c, sigx, r, T, dt);
+        u_computed = cash_or_nothing_dimension1(x0, x, hx, K, c, sigx, r, T, dt);
         u_exact = closed_form_solution_1d(x', K, c, sigx, r, T);
         
         req_price = interp1(x, u_computed, x0,'linear');
@@ -26,7 +27,7 @@ for i = 1 : 3
         end
     elseif dimension == 2
         rho = 0.5;
-        u_computed = cash_or_nothing_dimension2(x, hx, K, c, sigx, rho, r, T, dt);
+        u_computed = cash_or_nothing_dimension2(x0, x, hx, K, c, sigx, rho, r, T, dt);
         u_exact = closed_form_solution_2d(x', x', K, c, sigx, sigx, r, T, rho);
         
         req_price = interp2(x, x, u_computed(1:length(x), 1:length(x)), x0, x0, 'linear');
@@ -38,7 +39,7 @@ for i = 1 : 3
         rhoxy = 0.5;
         rhoyz = 0.5;
         rhoxz = 0.5;
-        u_computed = cash_or_nothing_dimension3(x0, L, x, hx, K, c, sigx, rhoxy, rhoyz, rhoxz, r, T, dt);
+        u_computed = cash_or_nothing_dimension3(x0, x, hx, K, c, sigx, rhoxy, rhoyz, rhoxz, r, T, dt);
         u_exact = closed_form_solution_3d(x', x', x', K, c, r, T, sigx, sigx, sigx, rhoxy, rhoxz, rhoyz);
 
         req_price = interp3(x, x, x, u_computed(1:length(x), 1:length(x), 1:length(x)), x0, x0, x0, 'linear');
