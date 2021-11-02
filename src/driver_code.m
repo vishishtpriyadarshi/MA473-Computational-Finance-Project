@@ -4,7 +4,7 @@ dimension = input(prompt);
 [x0, L] = deal(100, 300);
 [numerical_solution, error_arr] = deal([]);
 
-for i = 1 : 1
+for i = 1 : 3
     fprintf("Processing Grid - %d...\n", i);
     
     % Non-uniform grid
@@ -53,14 +53,14 @@ for i = 1 : 1
     numerical_solution(end + 1) = req_price;
     error_arr(end + 1) = error;
     
-    if i == 1
-        plot_graphs(x, x, x, u_computed, "Computed Solution", dimension);
-        plot_graphs(x, x, x, u_exact, "Exact Solution", dimension);
+    if i == 1 && (dimension == 1 || dimension == 2)
+        plot_graphs(x, x, u_computed, "Computed Solution", dimension);
+        plot_graphs(x, x, u_exact, "Exact Solution", dimension);
     end
 end
 
 
-T = [[1; 2; 3], numerical_solution', error_arr'];
+T = [[1 2 3]', numerical_solution', error_arr'];
 T = array2table(T, 'VariableNames', {'Grid';'Numerical solution';'Error'});
 disp(T);
 
