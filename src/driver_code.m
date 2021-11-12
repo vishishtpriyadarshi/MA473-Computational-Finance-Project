@@ -1,9 +1,11 @@
+format longe;
+
 prompt = "Enter the Number of Assets (1, 2 or 3): ";
 dimension = input(prompt);
 
 [x0, L] = deal(100, 300);
 [numerical_solution, error_arr] = deal([]);
-len = 1;
+len = 3;
 
 for i = 1 : len
     fprintf("Processing Grid - %d...\n", i);
